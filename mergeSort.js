@@ -1,38 +1,49 @@
-/**
- * Pseudocode
- * sort half left 
- * sort half right
- * merge halves
- */
+const mergeSort = () => {
+    const merge = (array, left, mid, right) => {
+        let tmp = array;
 
-const first = [3, 2, 1, 13, 8, 5, 0, 1]; //  [0, 1, 1, 2, 3, 5, 8, 13]
-const second = [105, 79, 100, 110] // [79, 100, 105, 110]
+        let i = 0;
+        let j = mid;
+        let k = 0;
 
-const merge = (A, B, C = []) => {
-  let i = 0;
-  let j = 0;
-  let k = 0;
+        while (i <= mid && j <= right - 1) {
+            
+           if (tmp[i] > tmp[j]) {
+               array[k] = tmp[j];
+               j++;
+               k++;
+           } else {
+               array[k] = tmp[i];
+               i++;
+               k++;
+           }
 
-  while (k !== A.length + B.length) {
+        }
 
-    if (A[i] > B[j]) {
-      C[k] = B[j];
-      k++;
-      j++;
-    } else {
-      C[k] = A[i];
-      k++;
-      i++;
+
+        return array;
     }
 
-    if (A[i] === undefined && B[j] !== undefined) {
-      C[k] = B[j];
-      k++;
-      j++;
-    }
-  }
+    const sort = (array, low, high) => {
+        if (low < high) {
+            let mid = (low + high) / 2;
 
-  return C;
+            sort(array, low, mid);
+            sort(array, mid + 1, high);
+
+            merge(array, low, mid + 1, high);
+        }
+
+        return array;
+    };
+
+
+    return { sort };
 };
 
-console.log(merge([1], [2],  output = []));
+let fArr = [-5, 12, 4, 2, 1, 8, 9, 13] // [-5, 1, 2, 4, 8, 9, 12, 13]
+
+let mSort = mergeSort();
+console.log(mSort.sort(fArr, 0, fArr.length))
+
+
