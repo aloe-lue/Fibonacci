@@ -1,59 +1,36 @@
-let first = [0, 2, -5, 3, 10, 12, 9, 11]; 
-
 const merge = (array, start, mid, end) => {
+  let a = [],
+    b = [],
+    c = [];
 
-  let fArr = [];
-  let sArr = [];
+  let d = 0,
+    e = 0;
 
-  let center = mid;
- 
-  let j = 0;
-  let k = 0;
-
-  // add to fArr and sArr
-  for (let i = start; i < end; i++) {
-    let element = array[i];
-
-    if (i < mid) {
-      fArr[k] = element;
-      k++
+  for (let i = 0; i < end; i++) {
+    if (i <= mid) {
+      a[d++] = array[i]
     }
 
-    if (i > mid - 1) {
-      sArr[j] = element;
-      j++
+    if (i > mid) {
+      b[e++] = array[i]
     }
   }
 
-  // initialize index array for sorting
-  let l = 0,
-    m = 0,
-    n = 0;
+  let i = 0,
+    j = 0,
+    k = 0;
 
-  let arr = [];
-  console.log(fArr, sArr)
-
-  for (let i = 0; i < fArr.length + sArr.length; i++) {
-    if (fArr[l] < sArr[m]) {
-      arr[n++] = fArr[l++];
+  while (i <= mid && j <= end) {
+    if (a[i] > b[j]) {
+      c[k++] = b[j++]
     } else {
-      arr[n++] = sArr[m++];
+      c[k++] = a[i++]
     }
   }
 
-  for (; n < fArr.length; n++) {
-    arr[n] = fArr[l++];
-  }
-
-  for (; n < sArr.length; n++) {
-    arr[n] = sArr[m++]
-  }
-
-  array.splice(start, end, ...arr);
-
-  return { array }
+  return c
 };
 
-const mergin = merge(first, 0, 4, 8);
+let arr = [3, 5, 7, 8, 1, 2, 4, 9]; // [1 2 3 4 5 7 8 9]
 
-console.log(mergin.array);
+console.log(merge(arr, 0, (arr.length / 2) - 1, arr.length))
