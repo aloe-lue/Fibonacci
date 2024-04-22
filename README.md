@@ -1,5 +1,8 @@
-# fibonacci
-Use loop and recursion for fibonacci sequence_
+# recursion
+function that calls itself
 
-fibLoop(8) // [0, 1, 1, 2, 3, 5, 8, 13]_
-fibRecursive(8) // [0, 1, 1, 2, 3, 5, 8, 13]
+## fibonacci
+use loop variant and recursion variant for fibonacci sequence.
+
+## merge-sort
+use divide and conquer strategy to solve merge sort recursion
