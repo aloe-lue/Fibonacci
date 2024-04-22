@@ -1,49 +1,57 @@
-const mergeSort = () => {
-    const merge = (array, left, mid, right) => {
-        let tmp = array;
+const merge = (array, start, mid, end) => {
+  let n1 = mid - start + 1; 
+  let n2 = end - mid;
 
-        let i = 0;
-        let j = mid;
-        let k = 0;
+  let a = [n1],
+    b = [n2];
 
-        while (i <= mid && j <= right - 1) {
-            
-           if (tmp[i] > tmp[j]) {
-               array[k] = tmp[j];
-               j++;
-               k++;
-           } else {
-               array[k] = tmp[i];
-               i++;
-               k++;
-           }
-
-        }
+  for (let i = 0; i < n1; i++) {
+      a[i] = array[start + i]
+  }
+  for (let i = 0; i < n2; i++) {
+      b[i] = array[mid + 1 + i]
+  }
 
 
-        return array;
+  let i, j, k;
+  i = 0;
+  j = 0;
+  k = start;
+
+  while (i < n1 && j < n2) {
+    if (a[i] >= b[j]) {
+      array[k++] = b[j++]
+    } else {
+      array[k++] = a[i++]
     }
+  }
 
-    const sort = (array, low, high) => {
-        if (low < high) {
-            let mid = (low + high) / 2;
+  while (i < n1) {
+    array[k++] = a[i++]
+  }
 
-            sort(array, low, mid);
-            sort(array, mid + 1, high);
+  while (j < n2) {
+    array[k++] = b[j++]
+  }
 
-            merge(array, low, mid + 1, high);
-        }
-
-        return array;
-    };
-
-
-    return { sort };
+  return array
 };
 
-let fArr = [-5, 12, 4, 2, 1, 8, 9, 13] // [-5, 1, 2, 4, 8, 9, 12, 13]
+const mergeSort = (array, start, end, center) => {
+  if (start < end) {
+    let mid = Math.floor((start + end) / 2);
 
-let mSort = mergeSort();
-console.log(mSort.sort(fArr, 0, fArr.length))
+    mergeSort(array, start, mid);
+    mergeSort(array, mid + 1, end)
+
+    merge(array, start, mid, end)
+  }
+
+  return array;
+};
 
 
+let arr1 = [3, 2, 1, 13, 8, 5, 0, 1];
+let arr2 = [79, 100, 105, 110];
+
+console.log(mergeSort(arr1, 0, arr1.length - 1), mergeSort(arr2, 0, arr2.length - 1)); 
